@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body style="background-color: #e6e6fa">
+  <h1 class="text-3xl font-bold font-sans underline text-center text-purple-900">
+    Tasks Management Application
+  </h1>
+
+  <br />
+  <div class="container text-center">
+    <form action="/add-task" method="get">
+      <input type="text" name="task" class="border-4 border-purple-500" />
+      <button type="submit" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        Add Task
+      </button>
+    </form>
+  </div>
+  <br />
+
+  <form action="" method="get">
+    <input type="text" name="search" class="border-4 border-purple-500" />
+    <button type="submit" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+      Search
+    </button>
+  </form>
+
+  <br />
+
+  <h2 class="text-2xl font-bold">Pending Tasks</h2>
+  <table class="table-fixed border-separate border-4 border-purple-500 container text-center">
+    <thead>
+      <tr class="bg-purple-400 text-white">
+        <th>Sr. No.</th>
+        <th>Task</th>
+        <th>Date of Creation</th>
+        <th>Functionalities</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr class="bg-purple-200">
+        <td><b>{{forloop.counter}}</b></td>
+        <td>{{task.title}}</td>
+        <td>{{task.created_date}}</td>
+        <td class="italic">
+          <a href="/delete-task/{{ task.id }}" class="text-red-900 font-bold">delete task</a><br />
+          <a href="/complete_task/{{ task.id }}" class="text-green-900 font-bold">complete task</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <br /><br />
+
+  <h2 class="text-2xl font-bold">Completed Tasks</h2>
+
+  <table class="table-fixed border-separate border-4 border-purple-500 container text-center">
+    <thead>
+      <tr class="bg-purple-400 text-white">
+        <th>Sr. no.</th>
+        <th>Task</th>
+        <th>Date of Creation</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in completed_tasks %}
+      <tr class="bg-purple-200">
+        <td><b>{{task.id}}</b></td>
+        <td>{{task.title}}</td>
+        <td>{{task.created_date}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  </div>
+
+  <br /><br />
+  <div class="container text-center">
+    <a href="/completed_tasks/"><button
+        class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        View completed tasks Page
+      </button></a>
+    <a href="/tasks/"><button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+        View Pending Tasks Page
+      </button></a>
+  </div>
+
+</body>
+
+</html>
